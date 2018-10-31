@@ -22,10 +22,10 @@ DOTFILE_SCRIPTS_DIR=$DOTFILES_DIR/scripts
 if [ ! -d $DOTFILES_DIR ]; then
   if hash git 2>/dev/null; then
     echo "Git is already installed. Cloning repository..."
-    git clone ssh://git@github.com/Stratus3D/dotfiles.git $DOTFILES_DIR
+    git clone ssh://git@github.com/Zman94/dotfiles.git $DOTFILES_DIR
   else
     echo "Git is not installed. Downloading repository archive..."
-    wget https://github.com/Stratus3D/dotfiles/archive/master.tar.gz
+    wget https://github.com/Zman94/dotfiles/archive/master.tar.gz
     tar -zxvf master.tar.gz
     mv dotfiles-master dotfiles
     # TODO: If we have to download the archive, we don't git the .git
@@ -126,9 +126,9 @@ source $HOME/.bashrc
 asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git || true
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git || true
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git || true
-asdf plugin-add lua https://github.com/Stratus3D/asdf-lua.git || true
+asdf plugin-add lua https://github.com/Zman94/asdf-lua.git || true
 asdf plugin-add postgres https://github.com/smashedtoatoms/asdf-postgres.git || true
-asdf plugin-add rebar https://github.com/Stratus3D/asdf-rebar.git || true
+asdf plugin-add rebar https://github.com/Zman94/asdf-rebar.git || true
 asdf plugin-add python https://github.com/tuvistavie/asdf-python.git || true
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git || true
 
