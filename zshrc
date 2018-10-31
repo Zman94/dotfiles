@@ -1,48 +1,27 @@
-# Zshrc file
+# If you come from bash you might have to change your $PATH.
+ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/zach/.oh-my-zsh"
 
-# This is faster than `autoload -U compinit && compinit`
-autoload -Uz compinit
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
-zcompdump_current() {
-  if [[ $(uname -s) == 'Darwin' ]]; then
-    [ "$(date +'%s')" != "$(stat -f '%Y' -t '%j' $HOME/.zcompdump)" ];
-  else
-    [ "$(date +'%s')" != "$(stat -c '%Y' $HOME/.zcompdump)" ];
-  fi
-}
-
-if zcompdump_current; then
-  compinit
-else
-  compinit -C
-fi
-
-# For my dotfiles repo to work correctly the paths to source'd files must be
-# relative to the location of this file. This doesn't handle cases where the
-# .zshrc is symlinked to a symlink.
-# Taken from http://stackoverflow.com/a/26492107/1245380
-ZSHRC_PATH=$(dirname "$(readlink "${(%):-%N}")")
-
-# This is faster than loading all of oh-my-zsh
-source $ZSH/lib/functions.zsh
-source $ZSH/lib/theme-and-appearance.zsh
-source $ZSH/lib/git.zsh
-source $ZSH/lib/history.zsh
-source $ZSH/lib/key-bindings.zsh
-source $ZSH/lib/completion.zsh
-source $ZSH/lib/misc.zsh
-source $ZSH/plugins/gitfast/gitfast.plugin.zsh
-source $ZSHRC_PATH/zsh/blinks-modified.zsh-theme
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -57,7 +36,9 @@ source $ZSHRC_PATH/zsh/blinks-modified.zsh-theme
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ ENABLE_CORRECTION="true"
+
+ DEFAULT_USER="zach"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -69,66 +50,101 @@ source $ZSHRC_PATH/zsh/blinks-modified.zsh-theme
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+ HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git tmuxinator rails)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+    256color
+    abbr-path
+    alias-tips
+    brew
+    git
+    colored-man
+    colorize
+    command-time
+    #docker
+    #docker-compose
+    gitgo
+    minikube
+    helm
+    kubectl
+    pip
+    python
+    ssh-agent
+    osx
+    vi-mode
+    zsh-syntax-highlighting
+    zsh-autopair
+    zsh-autosuggestions
+    zsh-apple-touchbar
+    zsh-command-time
+    zsh-dircolors-solarized
+)
 
-DISABLE_CORRECTION="true"
+source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.abbr_pwd
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+#
+export PATH=.:$PATH
+export HELM_HOME=/Users/zach/.helm
 
-# We need this so that tmux uses zsh when started in a zsh shell
-export SHELL='/bin/zsh'
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:."
 
-source $ZSHRC_PATH/mixins/general
-source $ZSHRC_PATH/mixins/functions
-source $ZSHRC_PATH/mixins/grep
-source $ZSHRC_PATH/mixins/path
-source $ZSHRC_PATH/mixins/asdf
-source $ZSHRC_PATH/mixins/aliases
-source $ZSHRC_PATH/mixins/man_color
+# added by travis gem
+[ -f /Users/Zach/.travis/travis.sh ] && source /Users/Zach/.travis/travis.sh
 
-# Save all history
-# Incrementally write history to file
-setopt INC_APPEND_HISTORY
-# Save timestamp to history file too
-setopt EXTENDED_HISTORY
-# Import newly written commands from the history file
-setopt SHARE_HISTORY
+#####################   .bash_profile   ########################
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=~/Envs
+export GOPATH=~/go
 
-precmd() {
-    if [ "$(id -u)" -ne 0 ]; then
-        echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history | tail -n 1)" >>! $HOME/history/zsh-history-$(date "+%Y-%m-%d").log;
-    fi
-}
-
-# Use vi mode
+### Vim Mode Updates ###
 bindkey -v
 
 # Vi mode settings
 # Better searching in command mode
-bindkey -M vicmd '?' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-forward
+bindkey -M vicmd '?' history-incremental-search-forward
+bindkey -M vicmd '/' history-incremental-search-backward
 
 # Beginning search with arrow keys
 bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
 # Easier, more vim-like editor opening
 # `v` is already mapped to visual mode, so we need to use a different key to
@@ -137,3 +153,58 @@ bindkey -M vicmd "^V" edit-command-line
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 export KEYTIMEOUT=1
+
+### END Vim Mode Updates ###
+
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias subl="sublime3"
+alias zgsal="gsa_login zachg57"
+alias pdf="evince"
+alias volume="alsamixer"
+alias flux="redshift -t 3700:3700"
+alias ml="cd ~/Projects/cs446/final"
+alias re="cd ~/Projects/Research-SP18"
+#alias python="python3"
+alias vim="mvim"
+alias kc="kubectl"
+alias kw="kubectl --namespace=wcra"
+alias bxli="bx pr login -u admin -p admin -a https://zachgleason.icp.ibmcsf.net:8443 --skip-ssl-validation -c id-zachgleason-account; bx pr cluster-config zachgleason"
+alias wcrali="bx login --apikey @~/.apikeys/apiKey.json"
+alias wrsli="bx login --apikey @~/.apikeys/apiKey_redsonja.json"
+alias fix="vim -p `git diff --name-only`;"
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+source ~/.iterm2_shell_integration.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zach/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zach/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zach/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zach/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
+}
+
+# define right prompt, regardless of whether the theme defined it
+RPS1='$(vi_mode_prompt_info)'
+RPS2=$RPS1

@@ -1,526 +1,436 @@
-set nocompatible
+" vim:set et sw=2
+set nocompatible              " be iMproved, required
+filetype on                  " required
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Background style
-set background=dark
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" set the color scheme
-colorscheme solarized
-" TODO: Pull colors for env variables
-"execute "set background=".$BACKGROUND
-"execute "colorscheme ".$THEME
+"Plugin 'scrooloose/syntastic' "In file syntax checking
 
-" Make background transparent since we are using solarized in the terminal
-let g:solarized_termtrans = 1
-set t_Co=256
+Plugin 'scrooloose/nerdcommenter' " Commenting
+Plugin 'scrooloose/nerdtree'      " Filesystem
+"Plugin 'jistr/vim-nerdtree-tabs'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Tag bar
+Plugin 'majutsushi/tagbar'
 
-" Turn on syntax highlighting
-syntax on
+Plugin 'valloric/youcompleteme'   " Code Completion
+"Plugin 'davidhalter/jedi-vim'     " Code Completion
+Plugin 'vim-scripts/YankRing.vim' " Add an Emacs-esq Yank Ring
+Plugin 'tpope/vim-fugitive'       " Git integration
+Plugin 'airblade/vim-gitgutter'   " Git diff
 
-" Limit syntax highlighting to 300 columns
-set synmaxcol=300
+Plugin 'Shougo/vimproc.vim'       " debugger
+Plugin 'idanarye/vim-vebugger'    " debugger
 
-" Only highlight 256 or fewer lines
-syntax sync minlines=256
+"Plugin 'vim-scripts/Conque-Shell'
+"Plugin 'vim-scripts/Conque-GDB'
+"Plugin 'joonty/vdebug'
 
-" Show line numbers
-set number
+Plugin 'fs111/pydoc.vim'                 " Python pydoc support
+Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace finder
+Plugin 'jiangmiao/auto-pairs'            " Auto close braces
+Plugin 'sheerun/vim-polyglot'            " Syntax highlighting
 
-" Turn on auto indenting
-set autoindent
+Plugin 'tpope/vim-surround'              " Surround for HTML
 
-" Use previous indent
-set copyindent
+"Plugin 'kien/rainbow_parentheses.vim'    " Rainbow parenthesis
+Plugin 'flazz/vim-colorschemes'          " Color Schemes
+Plugin 'tmhedberg/SimpylFold'            " Code folding help
+Plugin 'vim-scripts/indentpython.vim'    " Python indents
 
-" Tab is for spaces
-set tabstop=2
+Plugin 'yggdroot/indentline'             " Vertical tab lines
+Plugin 'godlygeek/tabular'               " line up by regex
+Plugin 'bling/vim-bufferline'            " Buffer line
 
-" Number of spaces to use for auto indenting
-set shiftwidth=2
+"Snippits
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
-" Convert tabs to spaces
+"Repeat command
+Plugin 'tpope/vim-repeat'
+
+"Org Mode
+"Plugin 'ceb/vim-orgmode'
+
+"Fuzzy file search
+Plugin 'ctrlpvim/ctrlp.vim'
+
+"Airline
+Plugin 'vim-airline/vim-airline'
+
+"Multiple Cursors
+Plugin 'terryma/vim-multiple-cursors'
+
+"Project search
+Plugin 'mileszs/ack.vim'
+
+"Javascript
+Plugin 'pangloss/vim-javascript'
+
+"Minimap
+"Plugin 'severin-lemaignan/vim-minimap'
+
+"X/Y on a search
+Plugin 'google/vim-searchindex'
+
+"Style Guides
+"Plugin 'google/styleguide'
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+"Plugin 'google/vim-glaive'
+
+"Javascript formatting
+Plugin 'maksimr/vim-jsbeautify'
+
+Plugin 'hdima/python-syntax'
+
+"Insert auto complete
+Plugin 'ervandew/supertab'
+
+"Easier find letters
+Plugin 'easymotion/vim-easymotion'
+
+"Individual scratch buffer on selected region
+Plugin 'chrisbra/NrrwRgn'
+
+"Json highlighting
+Plugin 'elzr/vim-json'
+
+"LOts of vim go stuff
+Plugin 'fatih/vim-go'
+
+"Soft editing for vim
+Plugin 'vim-pencil'
+"Lightweight snippet tool
+"Plugin 'joereynolds/vim-minisnip'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"
+"call glaive#Install()
+
+"Reload file
+set autoread
+
+"Folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+"Tab Movement
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+"Window Movement
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
+nnoremap <C-w><C-j> <C-W>J
+nnoremap <C-w><C-K> <C-W>K
+nnoremap <C-w><C-H> <C-W>H
+nnoremap <C-w><C-L> <C-W>L
+nnoremap <leader>ws <C-W>S
+nnoremap <leader>wv <C-W>v
+
+set splitbelow
+set splitright
+"Buffer movement
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+"Tag movement
+nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap te :tabedit 
+
+"set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
 set expandtab
 
-" Show matching brackets
-set showmatch
+" New tab
+nnoremap <leader>gn :tabedit<cr>
+nnoremap gn :tab sball<cr>
 
-" Highlight search results
+" Save and quit tab
+nnoremap <leader>wt :w<cr>:bd<cr>
+
+"cscope find callers
+if has("cscope")
+
+    """"""""""""" Standard cscope/vim boilerplate
+
+    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set cscopetag
+
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set csto=0
+
+    " show msg when any other cscope db added
+    set cscopeverbose
+
+
+    """"""""""""" My cscope/vim key mappings
+    "
+    " The following maps all invoke one of the following cscope search types:
+    "
+    "   's'   symbol: find all references to the token under cursor
+    "   'g'   global: find global definition(s) of the token under cursor
+    "   'c'   calls:  find all calls to the function name under cursor
+    "   't'   text:   find all instances of the text under cursor
+    "   'e'   egrep:  egrep search for the word under cursor
+    "   'f'   file:   open the filename under cursor
+    "   'i'   includes: find files that include the filename under cursor
+    "   'd'   called: find functions that function under cursor calls
+    "
+
+    nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+    nnoremap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+    nnoremap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+endif
+
+set ignorecase
+set nocompatible
 set hlsearch
+set colorcolumn=100
+set number
+let maplocalleader="\\"
+set background=dark
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+nnoremap <leader>pi :PluginInstall<cr>
+nnoremap <leader>pc :PluginClean<cr>
+nnoremap <leader>pu :PluginUpdate<cr>
+inoremap <c-u> <esc>bveU<esc>i
+nnoremap <Leader><C-]> <C-w><C-]><C-w>T
+iabbrev @@ zgleason94@gmail.com
+iabbrev ccop Copyright 2017 Zach Gleason, all rights reservedv
+iabbrev ffor for(int i = 0; i < counter; i++)
+syntax enable
+colorscheme Tomorrow-Night-Eighties
+"colorscheme Zenburn
+filetype plugin on
+autocmd BufNewFile,BufRead *.py set ft=python
 
-" Jump to the next match in the file after the cursor
-set incsearch
+"Search into sub folders
+"Display all matching files when we tab complete
+set path+=**
+set wildmenu
 
-" Wrap around the file when searching
-set wrapscan
+"Syntastic
+"let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [],'passive_filetypes': []}
 
-" Show 4 lines after cursor, useful when reviewing search results
-set scrolloff=4
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-" Show the 80 column line
-set colorcolumn=80,120
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-" Allow backspace to delete end of line, indent and start of line characters
+"YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3.6'
+let g:ycm_server_use_vim_stdout = 0
+map <leader>j  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+set shortmess+=c
+
+"Indent Line
+let g:indentLine_char = '┆'
+
+"Bufferline
+let g:bufferline_echo = 0
+
+"Fix backspace
 set backspace=indent,eol,start
 
-" Comment formatting options
-" Auto wrap text
-set formatoptions+=tc
-" Automatically insert the comment leader after hitting 'o' or 'O'
-set formatoptions+=o
-" Automatically insert the comment leader after hitting return in insert mode
-set formatoptions+=r
-" Allow formatting comments with 'gq'
-set formatoptions+=q
-" Allow numbered lists in comments
-set formatoptions+=n
+"Keep lines at bottom under cursor
+set scrolloff=10
 
-" Show pastetoggle status and allow it to be toggled with F2
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
+"Disable polyglot for python
+let g:polyglot_disabled = ['python']
+"Disable polyglot for graphql
+let g:polyglot_disabled = ['graphql']
+let g:graphql_javascript_tags = []
 
-" Show the curent mode on the last line (command line)
-set showmode
+"NerdTree
+map <leader>t :NERDTreeToggle<CR>
+map <leader>n <plug>NERDTreeTabsToggle<CR>
 
-" Turn on autocompletion of commands
-set wildmenu
-set wildmode=full
+"Tagbar
+nmap <leader>b :TagbarToggle<CR>
 
-" Toggle Tagbar
-nmap <F9> :TagbarToggle<CR>
+"Virtualenv support
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+  "project_base_dir = os.environ['VIRTUAL_ENV']
+  "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  "execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
-" Turn on cursor column highlighting
-set cursorcolumn
+"CTRLP
+let g:ctrlp_map = '<c-o>'
+let g:ctrlp_cmd = 'CtrlP'
 
-" don't beep
-set visualbell
-set noerrorbells
+"Mouse
+set mouse=a
 
-" The mouse is evil
-set mouse=
+"Clipboard
+set clipboard=unnamed
 
-" Font
-set guifont=Monaco:h12
+"fugitive git bindings
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Gpush<CR>
+nnoremap <leader>gp :Gpull<CR>
 
-" Show the status bar
-set laststatus=2
+"git gutter bindings
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
 
-" Custom status bar
-set statusline=\ Filename:%-8t                               " Filename
-set statusline+=\ Encoding:\%-8{strlen(&fenc)?&fenc:'none'}  " File encoding
-set statusline+=\ Line\ Endings:%-6{&ff}                     " Line Endings
-set statusline+=\ Type:%-12y                                 " File Type
-set statusline+=%=%h%m%r                                     " Flags
-set statusline+=\ %l/%L                                      " Cursor line and total lines
-set statusline+=\ %c                                         " Cursor column
-set statusline+=\ %P                                         " Percentage through file
-" No need to show the buffer number
-"set statusline+=\ Buf:%n                                     " Buffer number
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr mz<Plug>GitGutterUndoHunk'z5k5<C-y>
 
-" Color status bar
-highlight statusline ctermfg=cyan ctermbg=black guifg=cyan guibg=black
+"vebugger
+let g:vebugger_leader='<leader>d'
+nmap <leader>ds :VBGstepIn<CR>
+nmap <leader>dn :VBGstepOver<CR>
+nmap <leader>do :VBGstepOut<CR>
+nmap <leader>dc :VBGcontinue<CR>
+nmap <leader>de :VBGevalWordUnderCursor<CR>
+nmap <leader>db :VBGtoggleBreakpointThisLine<CR>
+nmap <leader>dg :VBGstartGDB
+nmap <leader>dt :VBGtoggleTerminalBuffer<CR><C-K><C-w><C-l>
+nmap <leader>dw :VBGrawWrite
 
-if has("unix")
-    let s:uname = system("uname")
-    if s:uname == "Darwin\n"
-        " allow yanking to OSX clipboard
-        " http://stackoverflow.com/questions/11404800/fix-vim-tmux-yank-paste-on-unnamed-register
-        if $TMUX == ''
-            set clipboard+=unnamed
-        else
-            set clipboard=unnamed
-        endif
-    else
-        " Allow yanking to clipboard on Ubuntu
-        set clipboard=unnamedplus
-    endif
-endif
+let g:ConqueTerm_Color = 2         " 1: strip color after 200 lines, 2: always with color
+let g:ConqueTerm_CloseOnEnd = 1    " close conque when program ends running
+let g:ConqueTerm_StartMessages = 0 " display warning messages if conqueTerm is configured incorrectly
 
-" Use special chars in place of tab and eol
-set listchars=eol:¬,tab:→\ ,extends:>,precedes:<,trail:·,space:·
 
-" Ignored files
-set wildignore+=/tmp/,*.so,*.swp,*.swo,*.zip,*.meta,*.prefab,*.png,*.jpg,*.beam
+"Repeat command
+nnoremap , @@
 
-" Allow hidden buffers
-set hidden
+"Global save session and restore session
+  "save and close all files and save global session
+nnoremap <leader>q :mksession! ~/.vim/Session.vim<CR>:wqa<CR>
+  "close all files without saving and save global session
+nnoremap <leader>www :mksession! ~/.vim/Session.vim<CR>:qa!<CR>
 
-" Use American English when spell checking is turned on
-set spelllang=en_us
-
-" Set the spell file to one stored in my dotfiles repo
-set spellfile=$HOME/dotfiles/vim/spell/en.utf-8.add
-
-" Autocompletion from spell check
-" TODO: Figure out if this is needed or not
-set complete+=kspell
-set complete+=s
-
-" TODO: Figure out what all these settings do and check in the ones that are
-" useful
-"set spell noci nosi noai nolist noshowmode noshowcmd
-
-if has("gui_running")
-  set guioption=-t
-endif
-
-" Don't redraw when executing macros
-set lazyredraw
-
-" Use the old vim regex engine (version 1, as opposed to version 2, which was
-" introduced in Vim 7.3.969). The Ruby syntax highlighting is significantly
-" slower with the new regex engine.
-" https://github.com/joshukraine/dotfiles/blob/79aae9ac707460877d0fb36a3ef6a9b1ea7c44ce/vim-performance.md
-set re=1
-
-" Use built in file browser (netrw) instead of NERDTree
-" (https://shapeshed.com/vim-netrw/)
-let g:netrw_banner = 0
-" Make the browser 25% of the width of the editor
-let g:netrw_winsize = 25
-" Show directory as an expandable tree
-let g:netrw_liststyle = 3
-" Disable the banner at the top of the buffer
-let g:netrw_banner = 0
-" Open files in the previous window (e.g. not the netrw file browser window)
-let g:netrw_browse_split = 4
-" Open files on the right
-let g:netrw_altv = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Shortcuts
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let mapleader = ","
-map ; :
-map  <Esc> :w
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>
-map <Leader>s <esc>:w<CR>
-map <Leader>m :Rmodel
-imap <esc>:tabn <F7>
-
-" Not sure what these are for
-map gT <F8>
-map gt <F7>
-map :tabn <F8>
-map :tabp <F7>
-map <Leader>cr <F5>
-
-" Disable arrow keys
-nnoremap <Left> :echoe "Use h"<cr>
-nnoremap <Right> :echoe "Use l"<cr>
-nnoremap <Up> :echoe "Use k"<cr>
-nnoremap <Down> :echoe "Use j"<cr>
-inoremap <Left> <esc> :echoe "Use h"<cr>
-inoremap <Right> <esc> :echoe "Use l"<cr>
-inoremap <Up> <esc> :echoe "Use k"<cr>
-inoremap <Down> <esc> :echoe "Use j"<cr>
-
-" Allow replacing of searched text by using `cs` on the first result and `n.`
-" on all consecutive results
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-            \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
-
-" Allow easy searching for visually selected text
-vnoremap /// y/<C-R>"<CR>
-
-" Allow sudo after opening file
-cmap w!! w !sudo tee >/dev/null %
-
-" Press Space to turn off highlighting and clear any message already displayed.
-:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" Toggle everything that occupies space on the left side of the editor
-function! ToggleLeftGuides()
-    if (g:left_guides_enabled == 1)
-        call HideLeftGuids()
-        let g:left_guides_enabled = 0
-    else
-        call ShowLeftGuids()
-        let g:left_guides_enabled = 1
-    endif
+function! RestoreSession()
+  if argc() == 0 "vim called without arguments
+    execute 'source ~/.vim/Session.vim'
+  end
 endfunction
+autocmd VimEnter * call RestoreSession()
 
-" By default everything on the left side is enabled
-let g:left_guides_enabled = 1
+"Airline
+let g:airline#extensions#tabline#enabled = 1
 
-" Hide everything that occupies space on the left side of the file, so we can
-" copy the file contents with ease
-function! HideLeftGuids()
-    " Hide line numbers
-    set nonumber
+"Open header or cpp file
+nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
-    " Hide GitGutter
-    GitGutterDisable
+"Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-    " Reset Syntastic, then set it to passive mode, this effectively hides the
-    " hints in the left side columns
-    SyntasticToggle
-    SyntasticReset
-endfunction
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-" Show everything that occupies space on the left side of the file
-function! ShowLeftGuids()
-    " Show line numbers
-    set number
-
-    " Show GitGutter
-    GitGutterEnable
-
-    " Run the Syntastic check
-    SyntasticCheck
-endfunction
-
-:nnoremap <F4>  :call ToggleLeftGuides()<CR>
-
-" Toggle visibility of whitespace characters
-nmap <leader>l :set list!<CR>
-
-" Load trailing whitespace functions
-source $HOME/.vim/whitespace.vim
-
-"highlight NonText ctermfg=darkgreen guifg=darkgreen
-highlight SpecialKey ctermfg=darkgreen guifg=darkgreen
-
-if &filetype == 'html' || exists("java_javascript")
-    " JAVA SCRIPT
-    "syn include @htmlJavaScript syntax/javascript.vim
-    syn include @htmlJavaScript ftdetect/javascript.vim
-endif
-
-" BangOpen is useful for open an executable script on the $PATH without having
-" to lookup the name manually. For example:
-"
-" :BangOpen which to_server
-"
-function! BangOpen(arg)
-    execute 'tabe ' . system(a:arg)
-endfunction
-
-command! -nargs=1 BangOpen :call BangOpen(<f-args>)
-
-function! SetSpaces(arg)
-    echo "settings spaces to: " . a:arg
-    execute 'set tabstop=' . a:arg
-    execute 'set shiftwidth=' . a:arg
-    execute 'set softtabstop=' . a:arg
-endfunction
-
-command! -nargs=1 SetSpaces :call SetSpaces(<f-args>)
-
-" JSON formatting with jq
-nnoremap <silent> <leader>fj :%!jq '.'<CR>
-
-" Erlang term formatting with erlang_pretty_print
-nnoremap <silent> <leader>fe :%!erlang_pretty_print -i<CR>
-
-" Jira ticket command
-nnoremap <silent> <leader>to :!open $BASE_TICKET_URL/<c-r>=expand("<cWORD>")<cr>/<CR>
-
-" Make Q repeat last macro
-nnoremap Q @@
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-"
-" Test running here is contextual in two different ways:
-"
-" 1. It will guess at how to run the tests. E.g., if there's a Gemfile
-"    present, it will `bundle exec rspec` so the gems are respected.
-"
-" 2. It remembers which tests have been run. E.g., if I'm editing user_spec.rb
-"    and hit enter, it will run rspec on user_spec.rb. If I then navigate to a
-"    non-test file, like routes.rb, and hit return again, it will re-run
-"    user_spec.rb. It will continue using user_spec.rb as my 'default' test
-"    until I hit enter in some other test file, at which point that test file
-"    is run immediately and becomes the default. This is complex to describe
-"    fully, but simple to use in practice: always hit enter to run tests. It
-"    will run either the test file you're in or the last test file you hit
-"    enter in.
-"
-" 3. Sometimes you want to run just one test. For that, there's <leader>T,
-"    which passes the current line number to the test runner. RSpec knows what
-"    to do with this (it will run the first test it finds at or below the
-"    given line number). It probably won't work with other test runners.
-"    'Focusing' on a single test in this way will be remembered if you hit
-"    enter from non-test files, as described above.
-"
-" 4. Sometimes you don't want contextual test running. In that case, there's
-"    <leader>a, which runs everything.
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! MapCR()
-  nnoremap <cr> :call RunTestFile()<cr>
-endfunction
-call MapCR()
-nnoremap <leader>T :call RunNearestTest()<cr>
-nnoremap <leader>a :call RunTests('')<cr>
-
-function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
-
-    " Are we in a test file?
-    let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\)$') != -1
-
-    " Run the tests for the previously-marked file (or the current file if
-    " it's a test).
-    if in_test_file
-        call SetTestFile(command_suffix)
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file)
-endfunction
-
-function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
-endfunction
-
-function! SetTestFile(command_suffix)
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@% . a:command_suffix
-endfunction
-
-function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    if expand("%") != ""
-      :w
-    end
-    " The file is executable; assume we should run
-    if executable(a:filename)
-      exec ":!./" . a:filename
-    " Project-specific test script
-    elseif filereadable("script/test")
-        exec ":!script/test " . a:filename
-    " Fall back to the .test-commands pipe if available, assuming someone
-    " is reading the other side and running the commands
-    elseif filewritable(".test-commands")
-      let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
-      exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
-
-      " Write an empty string to block until the command completes
-      sleep 100m " milliseconds
-      :!echo > .test-commands
-      redraw!
-    " Fall back to a blocking test run with Bundler
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec --color " . a:filename
-    elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
-      exec ":!bundle exec rspec --color " . a:filename
-    elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
-      exec ":!bin/rails test " . a:filename
-    " If we see python-looking tests, assume they should be run with Nose
-    elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
-      exec "!nosetests " . a:filename
-    end
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins and plugin settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Load plugins
-source $HOME/.vim/plugins.vim
-
-" Start CtrlP on startup
-autocmd VimEnter * CtrlP
-
-" Vim-Erlang Skeleton settings
-let g:erl_replace_buffer=0
-" TODO: Figure out how to copy default erlang templates into our custom dir
-" let g:erl_tpl_dir="~/.erlang_templates"
-
-" Erlang plugin settings. TODO: Pull these from the environment
-" let g:erl_author=""
-" let g:erl_company=""
-
-" Align line-wise comment delimiters flush left instead of following code
-" indentation
-let g:NERDDefaultAlign = 'left'
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" CtrlP directory mode
-let g:ctrlp_working_path_mode = 0
-
-set runtimepath^=$HOME/.vim/bundle/ctrlp.vim
-
-" Vim pencil settings
-" Hard wrapping was causing newlines I added to be removed from code in Markdown
-let g:pencil#wrapModeDefault = 'soft'
-let g:pencil#textwidth = 80
-
-augroup pencil
-    autocmd!
-    autocmd FileType mkd.markdown,markdown,mkd call pencil#init()
-    autocmd FileType text         call pencil#init()
+"Auto Formatting
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
-"open CtrlP in buffer mode
-nnoremap <leader>b :CtrlPBuffer<CR>
+"Project searching
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
-" custom CtrlP ignores toggle
-function! ToggleCtrlPIgnores()
-    if exists("g:ctrlp_user_command")
-        " unset the ignores
-        let g:ctrlp_custom_ignore = {}
-        unlet g:ctrlp_user_command
-    else
-        " always ignore these patterns
-        let g:ctrlp_custom_ignore = {
-                    \'dir': 'ebin\|DS_Store\|git$\|bower_components\|node_modules\|logs',
-                    \'file': '\v\.(beam|pyc|swo|jpg)$',
-                    \}
-        " also ignore files listed in the .gitignore
-        " This command returns all text files under version control
-        let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-        "let g:ctrlp_user_command = '(cd %s; git grep --cached -Il "") || find %s -type f'
-    end
-endfunction
+"Yankring
+set macmeta
 
-call ToggleCtrlPIgnores()
-"let g:ctrlp_user_command = '(cd %s; git grep --cached -Il "") || find %s -type f'
-:nnoremap <F6> call ToggleCtrlPIgnores()<CR>
+""=====Janus fixes=====
+""Preserve column
+"set nostartofline
 
-" vim-indent-guides settings
-"let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_start_level = 0
-"let g:indent_guides_guide_size = 1
+""Vim surround
+"vmap S <Plug>VSurround
+"xmap S <Plug>VSurround
 
-let g:ale_lint_delay = 400
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" File type settings (file type-specific settings in vim/ftplugin/)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd BufRead,BufNewFile *.txt setfiletype text
-autocmd BufRead,BufNewFile sys.config,*.app.src,*.app,*.erl,*.es,*.hrl,*.yaws,*.xrl,*.spec setfiletype erlang
-autocmd BufRead,BufNewFile Gemfile,Vagrantfile set filetype=ruby
-autocmd BufRead,BufNewFile Dockerfile,*.bats set filetype=sh
-autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy
-autocmd BufRead,BufNewFile *gitconfig set filetype=conf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Auto commands
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Automatically reload .vimrc
-autocmd! BufWritePost .vimrc,*vimrc source %
-
-" TODO: Turn on showcmd when in visual mode
-"autocmd VisualEnter * silent execute "set showcmd!"
-"autocmd VisualLeave * silent execute "set showcmd!"
+""nerd comment
+"let g:NERDDefaultAlign = 'left'
