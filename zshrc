@@ -131,28 +131,28 @@ export WORKON_HOME=~/Envs
 export GOPATH=~/go
 
 ### Vim Mode Updates ###
-bindkey -v
+bindkey -e
 
-# Vi mode settings
-# Better searching in command mode
-bindkey -M vicmd '?' history-incremental-search-forward
-bindkey -M vicmd '/' history-incremental-search-backward
+## Vi mode settings
+## Better searching in command mode
+#bindkey -M vicmd '?' history-incremental-search-forward
+#bindkey -M vicmd '/' history-incremental-search-backward
 
-# Beginning search with arrow keys
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
+## Beginning search with arrow keys
+#bindkey "^[OA" up-line-or-beginning-search
+#bindkey "^[OB" down-line-or-beginning-search
+#bindkey -M vicmd "k" up-line-or-beginning-search
+#bindkey -M vicmd "j" down-line-or-beginning-search
+#bindkey "${terminfo[khome]}" beginning-of-line
+#bindkey "${terminfo[kend]}" end-of-line
 
-# Easier, more vim-like editor opening
-# `v` is already mapped to visual mode, so we need to use a different key to
-# open Vim
-bindkey -M vicmd "^V" edit-command-line
+## Easier, more vim-like editor opening
+## `v` is already mapped to visual mode, so we need to use a different key to
+## open Vim
+#bindkey -M vicmd "^V" edit-command-line
 
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
+## Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+#export KEYTIMEOUT=1
 
 ### END Vim Mode Updates ###
 
