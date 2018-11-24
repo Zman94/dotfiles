@@ -205,4 +205,3 @@ run_install_scripts
 # Configure OSX
 ###############################################################################
 
-$HOME/dotfiles/scripts/setup/macos-defaults

@@ -19,27 +19,27 @@ DOTFILE_SCRIPTS_DIR=$DOTFILES_DIR/scripts
 # Setup dotfiles
 ###############################################################################
 
-if [ ! -d $DOTFILES_DIR ]; then
-  if hash git 2>/dev/null; then
-    echo "Git is already installed. Cloning repository..."
-    git clone ssh://git@github.com/Zman94/dotfiles.git $DOTFILES_DIR
-  else
-    echo "Git is not installed. Downloading repository archive..."
-    wget https://github.com/Zman94/dotfiles/archive/master.tar.gz
-    tar -zxvf master.tar.gz
-    mv dotfiles-master dotfiles
-    # TODO: If we have to download the archive, we don't git the .git
-    # metadata, which means we can't run `git pull` in dotfiles directory to
-    # update the dotfiles. Which means if we run this script again, the else
-    # clause below will fail.
-  fi
-else
-  cd $DOTFILES_DIR
-  # We could have modifications in the repository, so we stash them
-  git stash
-  git pull origin master
-  git stash pop
-fi
+#if [ ! -d $DOTFILES_DIR ]; then
+  #if hash git 2>/dev/null; then
+    #echo "Git is already installed. Cloning repository..."
+    #git clone ssh://git@github.com/Zman94/dotfiles.git $DOTFILES_DIR
+  #else
+    #echo "Git is not installed. Downloading repository archive..."
+    #wget https://github.com/Zman94/dotfiles/archive/master.tar.gz
+    #tar -zxvf master.tar.gz
+    #mv dotfiles-master dotfiles
+    ## TODO: If we have to download the archive, we don't git the .git
+    ## metadata, which means we can't run `git pull` in dotfiles directory to
+    ## update the dotfiles. Which means if we run this script again, the else
+    ## clause below will fail.
+  #fi
+#else
+  #cd $DOTFILES_DIR
+  ## We could have modifications in the repository, so we stash them
+  #git stash
+  #git pull origin master
+  #git stash pop
+#fi
 
 # Change to the dotfiles directory either way
 cd $DOTFILES_DIR
@@ -115,6 +115,7 @@ fi
 ###############################################################################
 # Create symlinks to custom config now that all the software is installed
 ###############################################################################
+echo "Copying Dot files and setting up vim"
 $DOTFILE_SCRIPTS_DIR/makesymlinks.sh
 
 ###############################################################################
@@ -149,3 +150,4 @@ $DOTFILE_SCRIPTS_DIR/setup/packages.sh
 ###############################################################################
 
 $DOTFILE_SCRIPTS_DIR/checkenv.sh
+

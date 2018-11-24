@@ -281,7 +281,7 @@ set wildmenu
 
 "YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3.6'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python2.7'
 let g:ycm_server_use_vim_stdout = 0
 map <leader>j  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 set shortmess+=c
@@ -422,7 +422,7 @@ if executable('ag')
 endif
 
 "Yankring
-set macmeta
+"set macmeta
 
 ""=====Janus fixes=====
 ""Preserve column
