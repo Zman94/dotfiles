@@ -1,53 +1,51 @@
 [alias]
-	# Shorten a few common commands
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
+    # Shorten a few common commands
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
 [color]
-	branch = auto
-	diff = auto
-	status = auto
+    branch = auto
+    diff = auto
+    status = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red
-	new = cyan
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = cyan
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 [core]
-	# Global gitignore rules
-	excludesfile = ~/.gitignore_global
+    # Global gitignore rules
+    excludesfile = ~/.gitignore_global
 
-	# Pay attention to case, even on OSX
-	ignorecase = false
+    # Pay attention to case, even on OSX
+    ignorecase = false
 
-	# Better diff of changes
-	pager = diff-so-fancy | less
+    # Better diff of changes
+    pager = diff-so-fancy | less
 [status]
-	# Show status of git submodules in git status output
-	submoduleSummary = true
+    # Show status of git submodules in git status output
+    submoduleSummary = true
 [diff]
-	# Show submodules changes in diffs as a list of commits like `git log` shows
-	submodule = log
+    # Show submodules changes in diffs as a list of commits like `git log` shows
+    submodule = log
 
-	# Default tool for resolving conflicts
-	tool = vimdiff3
 [fetch]
-	# Push push submodule changes to the remote before pushing the main project.
-	# If a submodule fails to push the main project will not be pushed.
-	recurseSubmodules = on-demand
+    # Push push submodule changes to the remote before pushing the main project.
+    # If a submodule fails to push the main project will not be pushed.
+    recurseSubmodules = on-demand
 [pull]
-	rebase = true
+    rebase = true
 [user]
-    name = Zachary Gleason
-    email = zachary.gleason@ibm.com
+    name = Zach Gleason
+    email = zgleason94@gmail.com
 [rebase]
-	# Always auto squash when rebasing
-	autoStash = true
+    # Always auto squash when rebasing
+    autoStash = true
