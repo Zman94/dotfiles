@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
- export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/zach/.oh-my-zsh"
@@ -8,7 +8,8 @@ export ZSH="/Users/zach/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -65,35 +66,32 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    256color
-    abbr-path
-    alias-tips
-    brew
-    git
-    colored-man
-    colorize
-    command-time
     #docker
     #docker-compose
+    alias-tips
+    brew
+    colored-man-pages
+    colorize
+    command-time
+    git
     gitgo
-    minikube
     helm
     kubectl
+    minikube
+    osx
     pip
     python
     ssh-agent
-    osx
     vi-mode
-    zsh-syntax-highlighting
+    zsh-256color
+    zsh-apple-touchbar
     zsh-autopair
     zsh-autosuggestions
-    zsh-apple-touchbar
-    zsh-command-time
     zsh-dircolors-solarized
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.abbr_pwd
 
 # User configuration
@@ -180,7 +178,7 @@ alias kw="kubectl --namespace=wcra"
 alias bxli="bx pr login -u admin -p admin -a https://zachgleason.icp.ibmcsf.net:8443 --skip-ssl-validation -c id-zachgleason-account; bx pr cluster-config zachgleason"
 alias wcrali="bx login --apikey @~/.apikeys/apiKey.json"
 alias wrsli="bx login --apikey @~/.apikeys/apiKey_redsonja.json"
-alias fix="vim -p `git diff --name-only`;"
+alias reload="source ~/.zshrc"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -208,3 +206,18 @@ function vi_mode_prompt_info() {
 # define right prompt, regardless of whether the theme defined it
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /Users/zach/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+##################
+### MS Aliases ###
+##################
+
+alias azuredev='az account set --subscription "PromoteIQTest"; az account show | jq .name'
+alias azureshared='az account set --subscription "PromoteIQ-SharedServices"; az account show | jq .name'
+alias azurenonprod='az account set --subscription "PromoteIQ-NonProd"; az account show | jq .name'
+alias azureprod='az account set --subscription "PromoteIQ-Production"; az account show | jq .name'
+alias azlistsub='az account list | grep Promote'
+alias azswitchsub='az account set --subscription'
+alias azdefault="az account list --query '[?isDefault]' -o yaml"
