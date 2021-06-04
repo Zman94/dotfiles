@@ -44,7 +44,6 @@
 [pull]
     rebase = true
 [user]
-    name = Zach Gleason
     email = zgleason94@gmail.com
 [rebase]
     # Always auto squash when rebasing

@@ -179,6 +179,7 @@ alias bxli="bx pr login -u admin -p admin -a https://zachgleason.icp.ibmcsf.net:
 alias wcrali="bx login --apikey @~/.apikeys/apiKey.json"
 alias wrsli="bx login --apikey @~/.apikeys/apiKey_redsonja.json"
 alias reload="source ~/.zshrc"
+alias tf="terraform"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -210,6 +211,9 @@ RPS2=$RPS1
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /Users/zach/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# asdf
+. /usr/local/opt/asdf/asdf.sh
+
 ##################
 ### MS Aliases ###
 ##################
@@ -221,3 +225,4 @@ alias azureprod='az account set --subscription "PromoteIQ-Production"; az accoun
 alias azlistsub='az account list | grep Promote'
 alias azswitchsub='az account set --subscription'
 alias azdefault="az account list --query '[?isDefault]' -o yaml"
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
